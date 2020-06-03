@@ -1,0 +1,90 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMA - Book My DOCTOR</title>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script
+  src="http://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+       <!-- Brand and toggle get grouped for better mobile display -->
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="home.html">BOOK MY DOCTOR</a>
+       </div>
+
+       <!-- Collect the nav links, forms, and other content for toggling -->
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav navbar-right">
+           <li><a href="index.html">Home</a></li>
+           <li><a href="trylogin.html">Patient's Login</a></li>
+           <li class="active"><a href="trysignup.html">Register <span class="sr-only">(current)</span></a></li>
+         </ul>
+       </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+</nav>
+ <div class="signup-page">
+   <div class="form">
+    <h2>Register</h2>
+      <form class="login-form" action="reg.php" method="POST">
+   <label for="firstName"><b>First Name</b></label>
+  <input type="name" placeholder="Enter First Name" name="firstName" required>
+  <label for="lastName"><b>Last Name</b></label>
+  <input type="name" placeholder="Enter Last Name" name="lastName">
+  <label for="gender"><b>Gender</b></label>
+  <select required="1" name="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+  <label for="dob"><b>DOB</b></label>
+  <input type="date" placeholder="Enter your date of birth" name="dob">
+  <label for="phoneNumber"><b>Phone Number</b></label>
+  <input type="tel" placeholder="Enter your Phone Number" name="phoneNumber" pattern="[0-9]{10}" required>
+  <label for="mail"><b>Email-id</b></label>
+  <input type="email" placeholder= " Enter Email" name="mail" required>
+  <label for="psw"><b>Password</b></label>
+  <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="question"><b>Security Question</b></label>
+      <select required="1" name="question">
+    <option value="1">Which is your favorite game?</option>
+    <option value="2">Who is your role model?</option>
+    </select>
+   <label for="answer"><b>Security Answer</b></label>
+  <input type="text" placeholder="Enter Answer" name="answer" required>
+   
+
+  
+  <button onclick="myFunction()">Create</button>
+
+  <p class="message">Already Registered? <a href="trylogin.html">Login</a></p>
+    </form>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js">
+  
+</script>
+<script>
+  $('.message a') .click(function(){
+    $('form') .animate({height:"toggle",opacity:"toggle"},"slow");
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!Doctype html>
+<html>
+<head>
+<title>Redirecting</title>
+	    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMA - Book My DOCTOR</title>
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="docstyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script
+  src="http://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+       <!-- Brand and toggle get grouped for better mobile display -->
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="home.html">BOOK MY APPOINTMENT</a>
+       </div>
+
+       <!-- Collect the nav links, forms, and other content for toggling -->
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav navbar-right">
+           <li><a href="index.html">Home</a></li>
+           <li><a href="trylogin.html">Patient's Login</a></li>
+           <li class="active"><a href="trysignup.html">Register <span class="sr-only">(current)</span></a></li>
+         </ul>
+       </div><!-- /.navbar-collapse -->
+     </div><!-- /.container-fluid -->
+</nav>
+<?php
+$con=mysqli_connect('127.0.0.1','root','','mybmd');
+if(!$con)
+{
+	header("refresh:10; url=fail.html");
+}
+$firstname=$_POST['firstName'];
+$lastname=$_POST['lastName'];
+$gender=$_POST['gender'];
+$dob=$_POST['dob'];
+$phNO=$_POST['mobilenumber'];
+$mail=$_POST['mail'];
+$pswd=$_POST['psw'];
+$qst=$_POST['question'];
+$ans=$_POST['answer'];
+$hpswd=md5($pswd);
+$hans=md5($ans);
+$qual=$_POST["qualification"];
+$dep=$_POST["dep"];
+$bid=$_POST["BuildingID"];
+$exp=$_POST["exp"];
+$fee=$_POST["fee"];
+$stmt="insert into docreg(DoctorID,FirstName,LastName,Gender,DOB,PhoneNumber,Registerdate,Qualification,Department,Experience,Fee) values(NULL,'$firstname','$lastname','$gender','$dob','$phNO',curdate(),'$qual','$dep','$exp','$fee');";
+if($con->query($stmt)!==TRUE)
+{
+	echo '1';
+	header("refresh:10; url=fail.html");
+}
+else{
+$stmt1="insert into doclog(DoctorID,Email,Password,Question,Answer,LastLogin) values(last_insert_id(),'$mail','$hpswd','$qst','$hans',now());";
+if($con->query($stmt1)!==TRUE)
+{
+	$message="Already this email exist!";
+	echo"<script type='text/javascript'>alert('$message');</script>";
+	
+	}
+else{
+header("refresh:0; url=doclog.html");
+}
+}
+$con->commit();
+?>
+</body>
+</html>
